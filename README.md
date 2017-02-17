@@ -20,7 +20,7 @@ browsers.
 import skin from 'tinymce-light-skin'
 
 // append styles to head
-skin.use() 
+skin.use()
 
 // when initializing TinyMCE set skin to false
 tinymce.init({ skin: false })
@@ -28,9 +28,11 @@ tinymce.init({ skin: false })
 // optionaly remove styles from head based on reference count
 skin.unuse()
 
-// inline variants
-skin.useInline()
-skin.unuseInline()
+// to inject content styles into editor's iframe
+tinymce.init({ content_style: skin.contentStyle })
+
+// inline variant
+tinymce.init({ content_style: skin.inlineStyle })
 ```
 
 [1]: https://pixabay.com/en/blog/posts/a-modern-custom-theme-for-tinymce-4-40/
