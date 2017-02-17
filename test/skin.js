@@ -20,7 +20,7 @@ describe('skin', () => {
     it('adds styles to head', () => {
       assert.equal(document.styleSheets.length, 0)
       skin.use()
-      assert.equal(document.styleSheets.length, 2)
+      assert.equal(document.styleSheets.length, 1)
       assert(/\.mce-container/.test(document.querySelector('style').textContent))
     })
 
@@ -36,7 +36,7 @@ describe('skin', () => {
     })
 
     it('removes styles from head', () => {
-      assert.equal(document.styleSheets.length, 2)
+      assert.equal(document.styleSheets.length, 1)
       skin.unuse()
       assert.equal(document.styleSheets.length, 0)
     })
@@ -47,16 +47,28 @@ describe('skin', () => {
       const expected = {
         use: skin.use,
         unuse: skin.unuse,
-        useInline: skin.useInline,
-        unuseInline: skin.unuseInline,
+        contentStyle: skin.contentStyle,
+        inlineStyle: skin.inlineStyle,
         default: {
           use: skin.use,
           unuse: skin.unuse,
-          useInline: skin.useInline,
-          unuseInline: skin.unuseInline,
+          contentStyle: skin.contentStyle,
+          inlineStyle: skin.inlineStyle
         }
       }
       assert.deepEqual(skin, expected)
+    })
+  })
+
+  describe('style strings', () => {
+    it('exports content style', () => {
+      assert(/body\{/.test(skin.contentStyle))
+      assert(/\.mce-object/.test(skin.contentStyle))
+    })
+
+    it('exports inline style', () => {
+      assert(/body\{/.test(skin.inlineStyle) === false)
+      assert(/\.mce-object/.test(skin.inlineStyle))
     })
   })
 })
