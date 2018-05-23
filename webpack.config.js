@@ -12,7 +12,7 @@ module.exports = {
     loaders: [
       {test: /(canvas|skin|content\.inline)(\.min)?\.css$/, loader: 'style-loader/useable' },
       {test: /\.css$/, loader: 'css-loader'},
-      {test: /\.gif/, loader: 'url-loader'},
+      {test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader'},
       {test: /\.woff/, loader: 'base64-font-loader'}
     ]
   }
